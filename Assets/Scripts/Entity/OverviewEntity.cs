@@ -14,49 +14,71 @@ public class OverviewEntity : MonoBehaviour
     [SerializeField] private Consts.eDir dir;
     private Vector3 rotDir;
 
+    [SerializeField] private bool isParentRot = true;
+
+    private Rigidbody rigid;
+
     private void Start()
     {
-        childTs = transform.GetChild(0);
-        targetRot = childTs.rotation;
+        rigid = GetComponent<Rigidbody>();
+        
+        if (isParentRot)
+        {
+            targetRot = transform.rotation;
+        }
+        else
+        {
+            childTs = transform.GetChild(0);
+            targetRot = childTs.rotation;
+        }
 
         rotDir = Consts.Def.DirVecs[(int)dir];
 
         isStart = false;
         isUpdating = true;
         rotSpeed = 200f;
-        
+
         DropEntitySpawner.Inst.ListDropEntity.Add(gameObject);
     }
 
     private void Update()
     {
-        if(!isUpdating)
+        if (!isUpdating)
             return;
+
+        Transform target = isParentRot ? transform : childTs;
         
         if (isStart)
-        {
-            childTs.rotation = Quaternion.Lerp(childTs.rotation, targetRot, Time.deltaTime * rotSpeed);
-            if (Quaternion.Angle(childTs.rotation, targetRot) <= 0.001f)
-            {
-                isUpdating = false;
-                GetComponent<Rigidbody>().useGravity = true;
-                childTs.rotation = Quaternion.Euler(0f, 0f, 90f);
-            }
-        }
+            ResetToInitialRotation(target);
         else
+            UpdateRotation(target);
+    }
+    
+    private void ResetToInitialRotation(Transform target)
+    {
+        target.rotation = Quaternion.Lerp(target.rotation, targetRot, Time.deltaTime * rotSpeed);
+        if (Quaternion.Angle(target.rotation, targetRot) <= 0.001f)
         {
-            childTs.Rotate(rotDir, Time.deltaTime * rotSpeed);
+            isUpdating = false;
+            rigid.useGravity = true;
+            target.rotation = targetRot;
         }
+    }
+    
+    private void UpdateRotation(Transform target)
+    {
+        target.Rotate(rotDir, Time.deltaTime * rotSpeed);
     }
 
     public void CallBackTapToStart()
     {
-        isStart = true;
+        isUpdating = false;
+        rigid.useGravity = true;
     }
 
     public void CallBackRetry()
     {
-        GetComponent<Rigidbody>().useGravity = false;
+        rigid.useGravity = false;
         rotSpeed = 200f;
         transform.position = new Vector3(0f, 2.17f, 0f);
     }
