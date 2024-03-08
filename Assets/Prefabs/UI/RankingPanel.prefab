@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 474891759004507510}
   - component: {fileID: 6998624487910330479}
   m_Layer: 5
-  m_Name: TextRank
+  m_Name: TextRankName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 8675150003815274132}
   - component: {fileID: 3376780096849576770}
   m_Layer: 5
-  m_Name: TextScore
+  m_Name: TextScoreInfoTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1063,7 +1063,7 @@ GameObject:
   - component: {fileID: 6275633473336488316}
   - component: {fileID: 2161369569045294067}
   m_Layer: 5
-  m_Name: TextRank
+  m_Name: TextRankInfoTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5116,7 +5116,7 @@ GameObject:
   - component: {fileID: 3966840256570872211}
   - component: {fileID: 2259307849336898777}
   m_Layer: 5
-  m_Name: TextScore
+  m_Name: TextScoreName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

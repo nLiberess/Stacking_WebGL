@@ -296,7 +296,6 @@ public class UIManager : MonoBehaviour
     public void UpdateRank()
     {
         Debug.Log("UIMgr::UpdateRank, 랭킹 표시 추후 수정");
-        return;
         
         var myStatus = FirebaseMgr.Inst.ArrUserStatus.Last();
         
