@@ -1,0 +1,38 @@
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          window.unityInstance = unityInstance;
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCqF2kWwMltlW_1Yy6iZak6WZlVTbchqAU",
+        authDomain: "gogo-2b0c3.firebaseapp.com",
+        databaseURL: "https://gogo-2b0c3-default-rtdb.firebaseio.com",
+        projectId: "gogo-2b0c3",
+        storageBucket: "gogo-2b0c3.appspot.com",
+        messagingSenderId: "999105970441",
+        appId: "1:999105970441:web:a122a6198de280b5ec13d8",
+        measurementId: "G-6VSK1LP7XG"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
